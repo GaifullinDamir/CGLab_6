@@ -146,7 +146,7 @@ void Pererisovka(void)
 			glPixelZoom(1, -1);
 			break;
 
-		case 5: /*Отображение R и B*/
+		case 5: /*Инверсия цветов*/
 
 			invertMap[0] = 1.0f;
 			for (i = 1; i < 256; i++)
@@ -158,6 +158,11 @@ void Pererisovka(void)
 			glPixelMapfv(GL_PIXEL_MAP_B_TO_B, 255, invertMap);
 			glPixelTransferi(GL_MAP_COLOR, GL_TRUE);
 			break;
+
+		case 6:/* Отображение компоненты R и B*/
+			glPixelTransferf(GL_RED_SCALE, 1.0f); //изменение яркости (по цветовой модели)
+			glPixelTransferf(GL_GREEN_SCALE, 0.0f);
+			glPixelTransferf(GL_BLUE_SCALE, 1.0f);
 
 
 		default:
@@ -198,7 +203,8 @@ int main(int argc, char* argv[])
 	glutAddMenuEntry("Сохранить текущее изображение", 2);
 	glutAddMenuEntry("Загрузить изображение из файла .kai", 3);
 	glutAddMenuEntry("Отобразить изображение относитель оси X", 4);
-	glutAddMenuEntry("Отображение R и B компонент", 5);
+	glutAddMenuEntry("Инверсия цветов", 5);
+	glutAddMenuEntry("Отображение R и B компонент", 6);
 	glutAttachMenu(GLUT_RIGHT_BUTTON);
 	gluOrtho2D(0, 512, 0, 512);
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
