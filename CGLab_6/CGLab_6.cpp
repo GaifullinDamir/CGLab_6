@@ -142,7 +142,7 @@ void Pererisovka(void)
 			break;
 
 		case 4: /*Отзеркаливание*/
-
+			glReadBuffer(GL_FRONT);
 			glPixelZoom(1, -1);
 			break;
 
@@ -150,13 +150,11 @@ void Pererisovka(void)
 
 			invertMap[0] = 1.0f;
 			for (i = 1; i < 256; i++)
-			{
 				invertMap[i] = 1.0f - (1.0f / 255.0f * (GLfloat)i);
-			}
-				
 			glPixelMapfv(GL_PIXEL_MAP_R_TO_R, 255, invertMap);
+			glPixelMapfv(GL_PIXEL_MAP_G_TO_G, 255, invertMap); //изменение цвета через массив
 			glPixelMapfv(GL_PIXEL_MAP_B_TO_B, 255, invertMap);
-			glPixelTransferi(GL_MAP_COLOR, GL_TRUE);
+			glPixelTransferi(GL_MAP_COLOR, GL_TRUE); // изменение 
 			break;
 
 		case 6:/* Отображение компоненты R и B*/
